@@ -1,3 +1,7 @@
+// C/C++ programs expect the Stack Pointer (ESP) to be set before running.
+// This sets the Stack Pointer (ESP) and then jumps into the Kernel.
+
+// "Magic Number", so that the Boot Loader will see us
 .set MAGIC, 0x1badb002
 .set FLAGS, (1<<0 | 1<<1)
 .set CHECKSUM, -(MAGIC + FLAGS)
@@ -20,7 +24,8 @@ loader:
 	push %eax
 	push %ebx
 	call kernelMain
-	
+
+// In-case kernelMain exits, infinite loop
 _stop:
 	cli
 	hlt

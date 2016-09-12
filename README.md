@@ -14,3 +14,7 @@ I've written software for a long time, but more-so at the high-level (web apps, 
 ** sudo apt-get install g++ binutils libc6-dev-i386
 ** sudo apt-get install virtualbox grub xorriso
 * Most importantly...Patience. YOU are the OS, so it takes a lot of time to get things working correctly sometimes.
+
+## TODO
+* Figure out 64-bit native
+* 
