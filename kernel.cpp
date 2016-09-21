@@ -1,6 +1,7 @@
 
 #include "types.h"
 #include "gdt.h"
+#include "interrupts.h"
 
 void printf(char* str)
 {
@@ -59,6 +60,9 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t magicnumber
 	printf("This should be on a second line if printf works properly.");
 	
 	GlobalDescriptorTable gdt;
+	//InterruptManager interrupts(&gdt);
+	
+	//interrupts.Activate();
 	
 	// Keep the Kernel running
 	while(1);
