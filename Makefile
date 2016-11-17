@@ -3,7 +3,7 @@ GPPPARAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-excep
 ASPARAMS = --32
 LDPARAMS = -melf_i386
 
-objects = loader.o gdt.o port.o interrupts.o kernel.o
+objects = loader.o gdt.o port.o interruptstubs.o interrupts.o kernel.o
 
 %.o: %.cpp
 	g++ $(GPPPARAMS) -o $@ -c $<
@@ -11,13 +11,13 @@ objects = loader.o gdt.o port.o interrupts.o kernel.o
 %.o: %.s
 	as $(ASPARAMS) -o $@ $<
 	
-mykernel.bin: linker.ld $(objects)
+cppOS.bin: linker.ld $(objects)
 	ld $(LDPARAMS) -T $< -o $@ $(objects)
 	
-install: mykernel.bin
-	sudo cp $< /boot/mykernel.bin
+install: cppOS.bin
+	sudo cp $< /boot/cppOS.bin
 
-mykernel.iso: mykernel.bin
+cppOS.iso: cppOS.bin
 	mkdir iso
 	mkdir iso/boot
 	mkdir iso/boot/grub
@@ -25,18 +25,14 @@ mykernel.iso: mykernel.bin
 	echo 'set timeout=0' > iso/boot/grub/grub.cfg
 	echo 'set default=0' >> iso/boot/grub/grub.cfg
 	echo '' >> iso/boot/grub/grub.cfg
-	echo 'menuentry "Funks Operating System" {' >> iso/boot/grub/grub.cfg
-	echo '	multiboot /boot/mykernel.bin' >> iso/boot/grub/grub.cfg
+	echo 'menuentry "cppOS" {' >> iso/boot/grub/grub.cfg
+	echo '	multiboot /boot/cppOS.bin' >> iso/boot/grub/grub.cfg
 	echo '	boot' >> iso/boot/grub/grub.cfg
 	echo '}' >> iso/boot/grub/grub.cfg
 	grub-mkrescue --output=$@ iso
 	rm -rf iso
 
-run: mykernel.iso
-	(killall virtualbox && sleep 1) || true
-	virtualbox --startvm "Funks Operating System" &
-
 .PHONY: clean
 clean:
-	rm -f $(objects) mykernel.bin mykernel.iso
+	rm -f $(objects) cppOS.bin cppOS.iso
 

@@ -15,6 +15,14 @@ I've written software for a long time, but more-so at the high-level (web apps, 
 ** sudo apt-get install virtualbox grub xorriso
 * Most importantly...Patience. YOU are the OS, so it takes a lot of time to get things working correctly sometimes.
 
+## How I work on this project
+One of my goals while working on this project is to do as much as possible with free tools and my existing hardware / operating system. That said, my configuration might be a little strange to some, but it's what I feel like rolling with and is comfortable for me personally.
+* Windows 10 Professional as the native OS
+* Bash on Ubuntu on Windows
+* Virtual Box
+* Microsoft Visual Studio
+
+
 ## TODO
 * Figure out 64-bit native
 * 

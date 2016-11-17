@@ -3,7 +3,7 @@
 
 .section .text
 
-.extend _ZN16InterruptManager15HandleInterruptEhj
+.extern _ZN16InterruptManager15HandleInterruptEhj
 
 .macro HandleException num
 .global _ZN16InterruptManager16HandleException\num\()Ev
