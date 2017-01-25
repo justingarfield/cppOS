@@ -27,8 +27,8 @@ loader:
 
 // In-case kernelMain exits, infinite loop
 _stop:
-	cli
-	hlt
+	cli # Clear interrupts
+	hlt # Halt CPU
 	jmp _stop
 	
 .section .bss

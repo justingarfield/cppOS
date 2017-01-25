@@ -1,48 +1,8 @@
 
-#include "types.h"
-#include "gdt.h"
-#include "interrupts.h"
-
-void printf(char* str)
-{
-	static uint16_t* VideoMemory = (uint16_t*)0xb8000;
-	
-	static uint8_t x = 0, y = 0;
-	
-	// Screen is 80 characters x 25 lines
-	for(int i = 0; str[i] != '\0'; i++) {
-		
-		switch(str[i])
-		{
-			case '\n':
-				y++;
-				x = 0;
-				break;
-			default:
-				VideoMemory[80*y+x] = (VideoMemory[80*y+x] & 0xFF00) | str[i];
-				x++;
-				break;
-		}
-	
-		if(x >= 80)
-		{
-			y++;
-			x = 0;
-		}
-		
-		if(y >= 25)
-		{
-			for(y=0; y < 25; y++)
-				for(x = 0; x < 80; x++)
-					VideoMemory[80*y+x] = (VideoMemory[80*y+x] & 0xFF00) | ' ';
-				
-			x = 0;
-			y = 0;
-		}
-		
-	}
-		
-}
+#include "architecture/types.h"
+#include "architecture/ia32/globalDescriptorTable.h"
+#include "architecture/ia32/interrupts/interruptManager.h"
+#include "utils.h"
 
 typedef void (*constructor)();
 extern "C" constructor start_ctors;
@@ -55,15 +15,26 @@ extern "C" void callConstructors()
 
 extern "C" void kernelMain(const void* multiboot_structure, uint32_t magicnumber)
 {
+
+	clearScreen();
+
+	printf("==================================================\n");
+	printf("#               Welcome to cppOS                 #\n");
+	printf("==================================================\n");
+	printf("\n");
+
+	printf("Initializing Global Descriptor Table (GDT)...");
+	GlobalDescriptorTable globalDescriptorTable;
+	printf("Done\n");
+	/*
+	printf("Initializing Interrupt Manager...");
+	InterruptManager interruptManager(0x20, &globalDescriptorTable);
+	printf("Done\n");
 	
-	printf("Hello World...coming from cppOS!!\n");
-	printf("This should be on a second line if printf works properly.");
-	
-	GlobalDescriptorTable gdt;
-	//InterruptManager interrupts(&gdt);
-	
-	//interrupts.Activate();
-	
+	printf("Activating Interrupts...")
+	interrupts.Activate();
+	printf("Done\n");
+	*/
 	// Keep the Kernel running
 	while(1);
 	

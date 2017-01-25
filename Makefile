@@ -3,10 +3,10 @@ GPPPARAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-excep
 ASPARAMS = --32
 LDPARAMS = -melf_i386
 
-objects = loader.o gdt.o port.o interruptstubs.o interrupts.o kernel.o
+objects = loader.o architecture/ia32/segmentDescriptor.o architecture/ia32/globalDescriptorTable.o architecture/x86/port.o utils.o kernel.o
 
 %.o: %.cpp
-	g++ $(GPPPARAMS) -o $@ -c $<
+	g++ $(GPPPARAMS) -g -o $@ -c $<
 	
 %.o: %.s
 	as $(ASPARAMS) -o $@ $<
@@ -31,6 +31,13 @@ cppOS.iso: cppOS.bin
 	echo '}' >> iso/boot/grub/grub.cfg
 	grub-mkrescue --output=$@ iso
 	rm -rf iso
+
+debug: cppOS.bin
+	qemu-system-x86_64 -kernel cppOS.bin -s -S &
+	gdb cppOS.bin -symbols . -tui -ex "target remote localhost:1234"
+
+run: cppOS.iso
+	qemu-system-x86_64 -kernel cppOS.bin
 
 .PHONY: clean
 clean:
