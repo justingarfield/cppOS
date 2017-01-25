@@ -14,47 +14,34 @@
  *
  */
 
-#include "8259.h"
+#include "intel8259a.h"
 
-Intel8259PIC::Intel8259PIC(uint16_t commandPortAddress, uint16_t dataPortAddress)
+Intel8259A::Intel8259A(uint16_t commandPortAddress, uint16_t dataPortAddress)
 {   
     this->commandPort = new Port8BitSlow(commandPortAddress);
     this->dataPort = new Port8BitSlow(dataPortAddress);
 }
 
-Intel8259PIC::~Intel8259PIC()
+ // Destructor that currently does nothing.
+// TODO: Make this tell the PIC to re-init maybe? Check docs and search for recommendations.
+Intel8259A::~Intel8259A() { }
+
+void Intel8259A::WriteCommand(uint8_t data)
 {
-    
+    this->commandPort.Write(data);
 }
 
-// Tells the PIC to run its initialization command
-void Intel8259PIC::Initialize()
+uint8_t Intel8259A::ReadCommand()
 {
-    this->commandPort.WriteCommand(0x11);
+    return this->commandPort.Read();
 }
 
-void Intel8259PIC::WriteCommand(uint32_t data)
+void Intel8259A::WriteData(uint8_t data)
 {
-
+    this->dataPort.Write(data);
 }
 
-uint32_t Intel8259PIC::ReadCommand()
+uint8_t Intel8259A::ReadData()
 {
-
-}
-
-void Intel8259PIC::WriteData(uint32_t data)
-{
-
-}
-
-uint32_t Intel8259PIC::ReadData()
-{
-
-}
-
-bool Intel8259PIC::IsICW4Needed() {
-
-    
-
+    this->dataPort.Read();
 }

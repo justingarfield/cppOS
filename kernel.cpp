@@ -1,8 +1,8 @@
 
+#include "utils.h"
 #include "architecture/types.h"
 #include "architecture/ia32/globalDescriptorTable.h"
 #include "architecture/ia32/interrupts/interruptManager.h"
-#include "utils.h"
 
 typedef void (*constructor)();
 extern "C" constructor start_ctors;
@@ -31,9 +31,9 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t magicnumber
 	InterruptManager interruptManager(0x20, &globalDescriptorTable);
 	printf("Done\n");
 	
-	printf("Activating Interrupts...")
+	//printf("Activating Interrupts...")
 	//interrupts.Activate();
-	printf("Done\n");
+	//printf("Done\n");
 	
 	// Keep the Kernel running
 	while(1);

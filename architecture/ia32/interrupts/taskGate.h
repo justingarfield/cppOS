@@ -10,7 +10,6 @@ struct TaskGate : GateDescriptor
 
     public:
         TaskGate(uint16_t tssSegmentSelectorAddress, bool isPresent);
-        ~TaskGate();
 
 };
 

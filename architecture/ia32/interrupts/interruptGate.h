@@ -2,15 +2,17 @@
 #ifndef __INTERRUPT_GATE_H
 #define __INTERRUPT_GATE_H
 
+#include "../../types.h"
 #include "gateDescriptor.h"
-#include "gateDescriptorType.h"
 
 struct InterruptGate : GateDescriptor
 {
+
+    protected:
+        uint32_t offsetAddress;
     
     public:
-        InterruptGate(uint16_t segmentSelectorAddress, bool isPresent);
-        ~InterruptGate();
+        InterruptGate(uint32_t offsetAddress, uint16_t segmentSelectorAddress, bool isPresent);
    
 };
 

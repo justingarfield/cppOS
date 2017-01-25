@@ -16,8 +16,3 @@ InitialisationCommandWord1::InitialisationCommandWord1(bool icw4Needed, bool sin
     // TODO: Deal with MCS80 environments (extra bits)
 
 }
-
-InitialisationCommandWord1::~InitialisationCommandWord1()
-{
-
-}

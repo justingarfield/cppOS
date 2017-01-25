@@ -2,8 +2,9 @@
 #ifndef __GATE_DESCRIPTOR_H
 #define __GATE_DESCRIPTOR_H
 
-#include "descriptorPrivilegeLevel.h";
-#include "gateDescriptorType.h";
+#include "../../types.h"
+#include "descriptorPrivilegeLevel.h"
+#include "gateDescriptorType.h"
 
 // Gate Descriptors are used in the Interrupt Descriptor Table (IDT) 
 class GateDescriptor
@@ -31,10 +32,9 @@ class GateDescriptor
         GateDescriptorType gateDescriptorType;
     
 
-    private:
-
-        GateDescriptor(uint16_t segmentSelectorAddress, bool isPresent, GateDescriptorType gateDescriptorType);
-        ~GateDescriptor();
+    public:
+        GateDescriptor();
+        //GateDescriptor(uint16_t segmentSelectorAddress, bool isPresent, GateDescriptorType gateDescriptorType);
 
 
 };

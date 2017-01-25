@@ -9,7 +9,6 @@ struct TrapGate : GateDescriptor
 
     public:
         TrapGate(uint16_t segmentSelectorAddress, bool isPresent);
-        ~TrapGate();
     
 };
 

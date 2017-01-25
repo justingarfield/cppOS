@@ -6,16 +6,9 @@
 TaskGate::TaskGate(uint16_t tssSegmentSelectorAddress, bool isPresent)
 {
 
-    this.segmentSelectorAddress = tssSegmentSelectorAddress;
-    this.isPresent = isPresent;
-    this.gateDescriptorType = GateDescriptorType::TaskGate32Bit;
-    this.descriptorPrivilegeLevel = DescriptorPrivilegeLevel::Ring0;
-
-}
-
-TaskGate::~TaskGate()
-{
-
-
+    this->segmentSelectorAddress = tssSegmentSelectorAddress;
+    this->isPresent = isPresent;
+    this->gateDescriptorType = TaskGate32Bit;
+    this->descriptorPrivilegeLevel = Ring0;
 
 }

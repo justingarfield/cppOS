@@ -14,10 +14,6 @@ class InitialisationCommandWord
     protected:
         char icwValue;
 
-    public:
-        InitialisationCommandWord();
-        ~InitialisationCommandWord();
-
 }
 
 #endif

@@ -7,8 +7,3 @@ GateDescriptor::GateDescriptor()
 
     
 }
-
-GateDescriptor::~GateDescriptor()
-{
-    
-}

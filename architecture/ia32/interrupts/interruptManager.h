@@ -4,13 +4,15 @@
 
 #include "../../types.h"
 #include "gateDescriptor.h"
+#include "optimized/gateDescriptorPacked.h"
+#include "../globalDescriptorTable.h"
 
 class InterruptManager
 {
 
 	protected:
 
-		static GateDescriptor interruptDescriptorTable[256];
+		static GateDescriptorPacked interruptDescriptorTable[256];
 
 		struct InterruptDescriptorTablePointer
 		{
@@ -19,7 +21,7 @@ class InterruptManager
 		} __attribute__((packed));
 
 		uint16_t hardwareInterruptOffset;
-		//static InterruptManager* ActiveInterruptManager;
+		
 		static void SetInterruptDescriptorTableEntry(uint8_t interrupt,
 			uint16_t codeSegmentSelectorOffset, void (*handler)(),
 			uint8_t DescriptorPrivilegeLevel, uint8_t DescriptorType);
@@ -71,8 +73,6 @@ class InterruptManager
 		InterruptManager(uint16_t hardwareInterruptOffset, GlobalDescriptorTable* globalDescriptorTable);
 		~InterruptManager();
 		uint16_t HardwareInterruptOffset();
-		void Activate();
-		void Deactivate();
 
 };
 
