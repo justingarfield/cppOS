@@ -26,15 +26,15 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t magicnumber
 	printf("Initializing Global Descriptor Table (GDT)...");
 	GlobalDescriptorTable globalDescriptorTable;
 	printf("Done\n");
-	/*
+	
 	printf("Initializing Interrupt Manager...");
 	InterruptManager interruptManager(0x20, &globalDescriptorTable);
 	printf("Done\n");
 	
 	printf("Activating Interrupts...")
-	interrupts.Activate();
+	//interrupts.Activate();
 	printf("Done\n");
-	*/
+	
 	// Keep the Kernel running
 	while(1);
 	

@@ -10,13 +10,13 @@ InterruptManager::InterruptManager(uint16_t hardwareIntteruptOffset, GlobalDescr
     // Keep a record of the Hardware Interrupt Offset
 	this->hardwareInterruptOffset = hardwareInterruptOffset;
 
-	uint16_t codeSegment = globalDescriptorTable->CodeSegmentSelector();
+	uint16_t codeSegmentSelector = globalDescriptorTable->CodeSegmentSelector();
 
 	const uint8_t IDT_INTERRUPT_GATE = 0xE;
 	for(uint8_t i = 255; i > 1; --i) {
-		SetInterruptDescriptorTableEntry(i, CodeSegment, &InterruptIgnore, 0, IDT_INTERRUPT_GATE);
+		SetInterruptDescriptorTableEntry(i, codeSegmentSelector, &InterruptIgnore, 0, IDT_INTERRUPT_GATE);
 
-	SetInterruptDescriptorTableEntry(0, CodeSegment, &InterruptIgnore, 0, IDT_INTERRUPT_GATE);
+	SetInterruptDescriptorTableEntry(0, codeSegmentSelector, &InterruptIgnore, 0, IDT_INTERRUPT_GATE);
 
     
 
