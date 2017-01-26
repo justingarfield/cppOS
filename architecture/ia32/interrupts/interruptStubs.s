@@ -60,23 +60,32 @@ HandleInterruptRequest 0x0F
 
 int_bottom:
 
-	pusha
-	pushl %ds
-	pushl %es
-	pushl %fs
-	pushl %gs
-	
-	pushl %esp
-	push (interruptNumber)
-	call _ZN16InterruptManager15HandleInterruptEhj
-	add %esp, 6
-	mov %eax, %esp
+	# register sichern
+    pusha
+    pushl %ds
+    pushl %es
+    pushl %fs
+    pushl %gs
 
-	pop %gs
-	pop %fs
-	pop %es
-	pop %ds
-	popa
+    # ring 0 segment register laden
+    #cld
+    #mov $0x10, %eax
+    #mov %eax, %eds
+    #mov %eax, %ees
+
+    # C++ Handler aufrufen
+    pushl %esp
+    push (interruptNumber)
+    call _ZN16InterruptManager15HandleInterruptEhj
+    add %esp, 6
+    mov %eax, %esp # den stack wechseln
+
+    # register laden
+    pop %gs
+    pop %fs
+    pop %es
+    pop %ds
+    popa
 	
 .global _ZN16InterruptManager15InterruptIgnoreEv
 _ZN16InterruptManager15InterruptIgnoreEv:

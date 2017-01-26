@@ -6,6 +6,7 @@
 #include "gateDescriptor.h"
 #include "optimized/gateDescriptorPacked.h"
 #include "../globalDescriptorTable.h"
+#include "../pics/intel8259a/intel8259aManager.h"
 
 class InterruptManager
 {
@@ -70,7 +71,7 @@ class InterruptManager
 		static uint32_t HandleInterrupt(uint8_t interrupt, uint32_t esp);
 
 	public:
-		InterruptManager(uint16_t hardwareInterruptOffset, GlobalDescriptorTable* globalDescriptorTable);
+		InterruptManager(uint16_t hardwareInterruptOffset, GlobalDescriptorTable* globalDescriptorTable, Intel8259AManager* picManager);
 		~InterruptManager();
 		uint16_t HardwareInterruptOffset();
 

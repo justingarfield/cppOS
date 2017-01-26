@@ -26,7 +26,7 @@ void InterruptManager::SetInterruptDescriptorTableEntry(uint8_t interrupt,
 }
 
 // Instansiate an Interrupt Manager with Master and Slave PICs defined.
-InterruptManager::InterruptManager(uint16_t hardwareIntteruptOffset, GlobalDescriptorTable* globalDescriptorTable)
+InterruptManager::InterruptManager(uint16_t hardwareInterruptOffset, GlobalDescriptorTable* globalDescriptorTable, Intel8259AManager* picManager)
 {
 
     // Keep a record of the Hardware Interrupt Offset
@@ -36,7 +36,7 @@ InterruptManager::InterruptManager(uint16_t hardwareIntteruptOffset, GlobalDescr
 
 	const uint8_t IDT_INTERRUPT_GATE = 0xE;
 	for(uint8_t i = 255; i > 1; --i) {
-		InterruptGate interruptGate = InterruptGate((uint32_t)InterruptIgnore, codeSegmentSelector, true);
+		//InterruptGate interruptGate = InterruptGate((uint32_t)InterruptIgnore, codeSegmentSelector, true);
 		SetInterruptDescriptorTableEntry(i, codeSegmentSelector, &InterruptIgnore, 0, IDT_INTERRUPT_GATE);
 	}
 
@@ -81,8 +81,7 @@ InterruptManager::InterruptManager(uint16_t hardwareIntteruptOffset, GlobalDescr
     SetInterruptDescriptorTableEntry(hardwareInterruptOffset + 0x0F, codeSegmentSelector, &HandleInterruptRequest0x0F, 0, IDT_INTERRUPT_GATE);
 
 	// Create a new Intel 8259A PIC Manager and Initalize / Configure the system PICs with Default Settings.
-	Intel8259AManager picManager = Intel8259AManager(hardwareInterruptOffset);
-	picManager.InitializeWithDefaultSettings();
+	picManager->InitializeWithDefaultSettings();
 
 	InterruptDescriptorTablePointer idt;
 	idt.size = 256 * sizeof(GateDescriptor) - 1;

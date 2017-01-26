@@ -10,13 +10,13 @@ Intel8259AManager::Intel8259AManager(uint16_t hardwareIntteruptOffset) : masterP
 }
 
 // Tell the Interrupt Manager to inform the PICs to start forwarding Interrupt Requests.
-void StartInterrupts()
+void Intel8259AManager::StartInterrupts()
 {
     asm("sti");
 }
 
 // Tell the Interrupt Manager to inform the PICs to stop forwarding Interrupt Requests.
-void StopInterrupts()
+void Intel8259AManager::StopInterrupts()
 {
     asm("cli");
 }
