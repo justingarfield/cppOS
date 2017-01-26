@@ -16,32 +16,26 @@
 
 #include "intel8259a.h"
 
-Intel8259A::Intel8259A(uint16_t commandPortAddress, uint16_t dataPortAddress)
-{   
-    this->commandPort = new Port8BitSlow(commandPortAddress);
-    this->dataPort = new Port8BitSlow(dataPortAddress);
+Intel8259A::Intel8259A(uint16_t commandPortAddress, uint16_t dataPortAddress) : commandPort(commandPortAddress), dataPort(dataPortAddress) {
+    
 }
 
  // Destructor that currently does nothing.
 // TODO: Make this tell the PIC to re-init maybe? Check docs and search for recommendations.
 Intel8259A::~Intel8259A() { }
 
-void Intel8259A::WriteCommand(uint8_t data)
-{
+void Intel8259A::WriteCommand(uint8_t data) {
     this->commandPort.Write(data);
 }
 
-uint8_t Intel8259A::ReadCommand()
-{
+uint8_t Intel8259A::ReadCommand() {
     return this->commandPort.Read();
 }
 
-void Intel8259A::WriteData(uint8_t data)
-{
+void Intel8259A::WriteData(uint8_t data) {
     this->dataPort.Write(data);
 }
 
-uint8_t Intel8259A::ReadData()
-{
-    this->dataPort.Read();
+uint8_t Intel8259A::ReadData() {
+    return this->dataPort.Read();
 }

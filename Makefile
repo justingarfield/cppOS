@@ -13,12 +13,11 @@ objects = 	kernel.o \
 			architecture/ia32/interrupts/interruptStubs.o \
 			architecture/ia32/interrupts/taskGate.o \
 			architecture/ia32/interrupts/trapGate.o \
-			architecture/ia32/interrupts/optimized/gateDescriptorPacked.o \
 			architecture/ia32/pics/intel8259a/intel8259a.o \
 			architecture/ia32/pics/intel8259a/intel8259aManager.o \
 			architecture/ia32/globalDescriptorTable.o \
 			architecture/ia32/segmentDescriptor.o \
-			architecture/x86/port.o
+			architecture/port.o
 
 %.o: %.cpp
 	g++ $(GPPPARAMS) -g -o $@ -c $<

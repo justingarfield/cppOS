@@ -36,7 +36,7 @@ InterruptManager::InterruptManager(uint16_t hardwareIntteruptOffset, GlobalDescr
 
 	const uint8_t IDT_INTERRUPT_GATE = 0xE;
 	for(uint8_t i = 255; i > 1; --i) {
-		InterruptGate interruptGate(&InterruptIgnore, codeSegmentSelector, true);
+		InterruptGate interruptGate = InterruptGate((uint32_t)InterruptIgnore, codeSegmentSelector, true);
 		SetInterruptDescriptorTableEntry(i, codeSegmentSelector, &InterruptIgnore, 0, IDT_INTERRUPT_GATE);
 	}
 

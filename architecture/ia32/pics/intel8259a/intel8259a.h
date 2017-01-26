@@ -16,7 +16,7 @@
 class Intel8259A
 {
 
-    protected:
+    private:
 
         // Port allowing the raw rading/writing of commands to the underlying PIC
         Port8BitSlow commandPort;

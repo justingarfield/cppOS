@@ -32,7 +32,7 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t magicnumber
 	printf("Done\n");
 	
 	//printf("Activating Interrupts...")
-	//interrupts.Activate();
+	//interruptManager.Activate();
 	//printf("Done\n");
 	
 	// Keep the Kernel running

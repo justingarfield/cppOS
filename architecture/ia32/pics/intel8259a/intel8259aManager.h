@@ -1,6 +1,7 @@
 #ifndef __INTEL_8259A_MANAGER_H
 #define __INTEL_8259A_MANAGER_H
 
+    #include "intel8259a.h"
     #include "microProcessorMode.h"
     #include "../../../types.h"
 
@@ -11,7 +12,8 @@
     class Intel8259AManager {
         
         private:
-
+            Intel8259A masterPIC;
+            Intel8259A slavePIC;
             uint16_t hardwareInterruptOffset;
             
         public:

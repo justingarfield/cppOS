@@ -6,8 +6,8 @@
 .extern _ZN16InterruptManager15HandleInterruptEhj
 
 .macro HandleException num
-.global _ZN16InterruptManager16HandleException\num\()Ev
-_ZN16InterruptManager16HandleException\num\()Ev:
+.global _ZN16InterruptManager19HandleException\num\()Ev
+_ZN16InterruptManager19HandleException\num\()Ev:
 	movb $\num, (interruptNumber)
 	jmp int_bottom
 .endm
@@ -38,6 +38,7 @@ HandleException 0x0F
 HandleException 0x10
 HandleException 0x11
 HandleException 0x12
+HandleException 0x13
 
 HandleInterruptRequest 0x00
 HandleInterruptRequest 0x01
