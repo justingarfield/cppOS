@@ -1,23 +1,14 @@
 
 #include "utils.h"
 #include "architecture/types.h"
-#include "architecture/ia32/globalDescriptorTable.h"
-#include "architecture/ia32/interrupts/interruptManager.h"
-#include "architecture/ia32/pics/intel8259a/intel8259aManager.h"
-
-typedef void (*constructor)();
-extern "C" constructor start_ctors;
-extern "C" constructor end_ctors;
-extern "C" void callConstructors()
-{
-	for(constructor* i = &start_ctors; i != &end_ctors; i++)
-		(*i)();
-}
+//#include "architecture/ia32/globalDescriptorTable.h"
+//#include "architecture/ia32/interrupts/interruptManager.h"
+//#include "architecture/ia32/pics/intel8259a/intel8259aManager.h"
 
 extern "C" void kernelMain(const void* multiboot_structure, uint32_t magicnumber)
 {
 
-	clearScreen();
+	//clearScreen();
 
 	printf("==================================================\n");
 	printf("#               Welcome to cppOS                 #\n");
@@ -25,19 +16,19 @@ extern "C" void kernelMain(const void* multiboot_structure, uint32_t magicnumber
 	printf("\n");
 
 	printf("Initializing Global Descriptor Table (GDT)...");
-	GlobalDescriptorTable globalDescriptorTable;
+	//GlobalDescriptorTable globalDescriptorTable;
 	printf("Done\n");
 	
 	printf("Initializing PIC Manager...");
-	Intel8259AManager picManager(0x20);
+	//Intel8259AManager picManager(0x20);
 	printf("Done\n");
 
 	printf("Initializing Interrupt Manager...");
-	InterruptManager interruptManager(0x20, &globalDescriptorTable, &picManager);
+	//InterruptManager interruptManager(0x20, &globalDescriptorTable, &picManager);
 	printf("Done\n");
 	
 	printf("Activating Interrupts...");
-	picManager.StartInterrupts();
+	//picManager.StartInterrupts();
 	printf("Done\n");
 	
 	// Keep the Kernel running
