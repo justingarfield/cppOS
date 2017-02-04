@@ -43,7 +43,7 @@ _Note: I tried getting this to work in Bash on Ubuntu on Windows - Beta, but due
 11. Open another Terminal after restart and run:
     * `sudo apt-get install --yes git g++ binutils libc6-dev-i386 grub xorriso qemu-system-x86-64`
     * `mkdir ~/Development`
-    * `git --clone https://github.com/Tri4ce/cppOS.git ~/Development`
+    * `git clone https://github.com/Tri4ce/cppOS.git ~/Development/cppOS`
     
 ## TODO
 * Figure out 64-bit native
