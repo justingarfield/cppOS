@@ -31,7 +31,7 @@ cppOS.bin: linker.ld $(objects)
 install: cppOS.bin
 	sudo cp $< /boot/cppOS.bin
 
-cppOS.iso: cppOS.bin
+iso: cppOS.bin
 	mkdir iso
 	mkdir iso/boot
 	mkdir iso/boot/grub
@@ -50,7 +50,7 @@ debug: cppOS.bin
 	qemu-system-x86_64 -kernel cppOS.bin -s -S &
 	gdb cppOS.bin -symbols . -tui -ex "target remote localhost:1234"
 
-run: cppOS.iso
+run: cppOS.bin
 	qemu-system-x86_64 -kernel cppOS.bin
 
 .PHONY: clean

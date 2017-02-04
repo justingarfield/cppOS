@@ -1,17 +1,31 @@
 # cppOS
 
+> CURRENT STATE
+
+> I'm currently in the middle of finishing the proper implementation of interrupts and the IDT.
+
+> At this point, the OS will simply just boot up, load its GDT, and that's it.
+
+> Once I complete interrupts, much more will be available in a short-time after.
+
 ## Overview
-This is a simple operating system written in C/C++ and derived from the excellent video series at https://www.youtube.com/channel/UCQdZltW7bh1ta-_nCH7LWYw I highly recommend anyone interested in starting from scratch watch this video series.
+This is a simple operating system written in Assembly and C/C++, derived from a combination of official manuals, reference web sites, YouTube videos, and online lectures.
+
+My intent is to help break barriers down for developers coming from managed object-oriented languages and to also promote my own self-learning. 
+My hope is that it will be helpful to others to at least learn bits and pieces about what happens down near the bare-metal and what's going on 
+inside of our computers or anything with a microprocessor inside of it.
+
+Please see the _Source and Reference Materials_ section for a boat-load of links to supporting materials and information. 
+Whenever you're at a loss, sift through the links and you should find answers or starting points to find them.
 
 ## Background
-I've written software for a long time, but more-so at the high-level (web apps, web forms, PHP, etc.) I finally got frustrated not understanding the low-level functions of an OS and wanted to be able to troubleshoot much more precisely. So what better way than to understand what happens under all the higher-level stuff you work in on a daily basis? This applies to all sorts of fields as well! (IoT, Mobile, Embedded Systems, Security, etc)
+Having written software for a long time, but more-so at the high-level (web apps, web forms, PHP, etc.) I finally got frustrated not understanding the low-level functions of an OS and wanted to be able to troubleshoot much more precisely. So what better way than to understand what happens under all the higher-level stuff you work in on a daily basis? This applies to all sorts of fields as well! (IoT, Mobile, Embedded Systems, Security, etc)
 
 ## Prerequisites
 * Understanding of compiling software at a bare minimum
 * Understanding of binary calculations and hi/low bits
-* *nix Distribution that can run the gnu compiler and tools (I'm using Linux Mint 17)
-* *nix Packages
-** sudo apt-get install g++ binutils libc6-dev-i386 grub xorriso
+* Understanding of Assembly and C/C++
+* *nix Distribution that can run the gnu compiler and tools
 * Most importantly...Patience. YOU are the OS, so it takes a lot of time to get things working correctly sometimes.
 
 ## How I work on this project
@@ -20,6 +34,8 @@ One of my goals while working on this project is to do as much as possible with 
     * [Google Chrome](https://www.google.com/chrome/) - Main browser on my main machine
     * [Oracle VM Virtual Box](https://www.virtualbox.org/) - HyperVisor so we can run Linux for the dev machine
         * [Linux Mint 18.1](https://www.linuxmint.com/) - Guest OS where development and debugging tools live
+            * [Visual Studio Code](https://code.visualstudio.com/) - Main IDE and development tools
+            * Build tools, GRUB, and other dev-related libraries and programs
 
 _Note: I tried getting this to work in Bash on Ubuntu on Windows - Beta, but due to a limitation accessing the network stack, I was unable to proceed. I will revisit this setup later on if they decide to expose more inside that feature._
 
@@ -44,39 +60,37 @@ _Note: I tried getting this to work in Bash on Ubuntu on Windows - Beta, but due
     * `sudo apt-get install --yes git g++ binutils libc6-dev-i386 grub xorriso qemu-system-x86-64`
     * `mkdir ~/Development`
     * `git clone https://github.com/Tri4ce/cppOS.git ~/Development/cppOS`
-    
-## TODO
-* Figure out 64-bit native
-* Add section for readelf and objdump
-* Add section for gdb and remote debugging with qemu
-* Add section for 
+12. Download and install [Visual Studio Code](https://code.visualstudio.com/)
+13. Open Visual Studio Code
+14. Click _File_, click _Open Folder..._, pick the _/Development/cppOS_ folder we cloned into earlier.
 
-### For loader.s
-* See: http://wiki.osdev.org/Multiboot
-* See: https://www.gnu.org/software/grub/manual/multiboot/html_node/multiboot.h.html
-* See: https://en.wikipedia.org/wiki/Hexspeak
-* See: https://www.chemie.fu-berlin.de/chemnet/use/info/gas/gas_7.html*SEC116
-* See: https://www.tutorialspoint.com/assembly_programming/assembly_basic_syntax.htm
-* See: http://web.mit.edu/gnu/doc/html/as_7.html
-* See: https://www.tutorialspoint.com/assembly_programming/
-* See: 
+## Makefile Targets ##
+This project utilizes a Makefile to quickly compile, debug, run, and package the OS code and binaries.
+This section is an overview of each target available in the Makefile.
 
+### ```make``` ###
+Runs the `g++` and `as` compilers against source to generate objects, followed by running `ld` to link them and create a _cppOS.bin_ file.
 
-// Define the Type "Constructor" which is a Pointer to a Function that takes zero-arguments.
-/*
+### ```make debug``` ###
+Calls `qemu-system-x86_64 -kernel cppOS.bin -s -S &` to start cppOS in debug mode and then remotely attaches with gdb pointing to the working directory for symbols.
 
-		# TODO: Why do we do this?
-		#call callConstructors # Linked in from kernel.cpp
+### ```make run``` ###
+Calls `qemu-system-x86_64` with the _-kernel_ flag, passing it the _cppOS.bin_ file to use as the kernel.
 
+### ```make cppOS.iso``` ###
+Generates a bootable ISO image of cppOS by calling `grub-mkrescue` and providing the _cppOS.bin_ and _Multiboot v1_ entries for the _GRUB Bootloader_ to see the OS.
 
-typedef void (*Constructor)();
+### ```make install``` ###
+Copies the _cppOS.bin_ generated from the default make target to the /boot directory. Use this if you want to try rebooting and pointing to your own kernel when you hit GRUB.
 
-extern "C" Constructor start_ctors;
-extern "C" Constructor end_ctors;
+### ```make clean``` ###
+Removes all files generated by any of the make targets.
 
-extern "C" void callConstructors()
-{
-	for(Constructor* i = &start_ctors; i != &end_ctors; i++)
-		(*i)();
-}
-*/
+## Source and Reference Materials
+
+* [OSDev Wiki - Multiboot](http://wiki.osdev.org/Multiboot)
+* [Multiboot Specification - multiboot.h](https://www.gnu.org/software/grub/manual/multiboot/html_node/multiboot.h.html)
+* [Hexspeak - Wikipedia](https://en.wikipedia.org/wiki/Hexspeak)
+* [Assembly Basic Syntax](https://www.tutorialspoint.com/assembly_programming/assembly_basic_syntax.htm)
+* [Using as - Assembler Directives](http://web.mit.edu/gnu/doc/html/as_7.html)
+* [Assembly Programming Tutorial](https://www.tutorialspoint.com/assembly_programming/)
