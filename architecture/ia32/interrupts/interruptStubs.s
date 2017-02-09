@@ -19,6 +19,7 @@ _ZN16InterruptManager26HandleInterruptRequest\num\()Ev:
 	jmp int_bottom
 .endm
 
+# Interrupts 0-31 are reserved by the Intel 64 and IA-32 architectures for architecture-defined exceptions and interrupts
 HandleException 0x00
 HandleException 0x01
 HandleException 0x02
@@ -39,6 +40,18 @@ HandleException 0x10
 HandleException 0x11
 HandleException 0x12
 HandleException 0x13
+HandleException 0x14
+HandleException 0x15
+HandleException 0x16
+HandleException 0x17
+HandleException 0x18
+HandleException 0x19
+HandleException 0x1A
+HandleException 0x1B
+HandleException 0x1C
+HandleException 0x1D
+HandleException 0x1E
+HandleException 0x1F
 
 HandleInterruptRequest 0x00
 HandleInterruptRequest 0x01
@@ -50,7 +63,6 @@ HandleInterruptRequest 0x06
 HandleInterruptRequest 0x07
 HandleInterruptRequest 0x08
 HandleInterruptRequest 0x09
-HandleInterruptRequest 0x10
 HandleInterruptRequest 0x0A
 HandleInterruptRequest 0x0B
 HandleInterruptRequest 0x0C
@@ -74,7 +86,7 @@ int_bottom:
     push (interruptNumber)
     call _ZN16InterruptManager15HandleInterruptEhj
     add %esp, 6
-    mov %eax, %esp # den stack wechseln
+    mov %eax, %esp
 
     # Pop gs, fs, es, and ds Register values off of the Stack
     pop %gs

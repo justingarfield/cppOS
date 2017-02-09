@@ -2,7 +2,7 @@
 #include "segmentDescriptor.h"
 #include "../types.h"
 
-SegmentDescriptor::SegmentDescriptor(uint32_t base, uint32_t limit, uint8_t flags) {
+SegmentDescriptor::SegmentDescriptor(uint32_t base, uint32_t limit, uint8_t type) {
 	
 	uint8_t* target = (uint8_t*)this;
 	
@@ -27,7 +27,7 @@ SegmentDescriptor::SegmentDescriptor(uint32_t base, uint32_t limit, uint8_t flag
 	target[4] = (base >> 16) & 0xFF;
 	target[7] = (base >> 24) & 0xFF;
 	
-	target[5] = flags;
+	target[5] = type;
 	
 }
 

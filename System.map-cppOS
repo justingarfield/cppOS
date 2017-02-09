@@ -1,0 +1,430 @@
+
+Discarded input sections
+
+ .comment       0x0000000000000000       0x35 kernel.o
+ .comment       0x0000000000000000       0x35 utils.o
+ .comment       0x0000000000000000       0x35 architecture/ia32/interrupts/gateDescriptor.o
+ .comment       0x0000000000000000       0x35 architecture/ia32/interrupts/interruptDescriptorTable.o
+ .comment       0x0000000000000000       0x35 architecture/ia32/interrupts/interruptGate.o
+ .comment       0x0000000000000000       0x35 architecture/ia32/interrupts/interruptManager.o
+ .comment       0x0000000000000000       0x35 architecture/ia32/interrupts/taskGate.o
+ .comment       0x0000000000000000       0x35 architecture/ia32/interrupts/trapGate.o
+ .comment       0x0000000000000000       0x35 architecture/ia32/pics/intel8259a/intel8259a.o
+ .comment       0x0000000000000000       0x35 architecture/ia32/pics/intel8259a/intel8259aManager.o
+ .comment       0x0000000000000000       0x35 architecture/ia32/globalDescriptorTable.o
+ .comment       0x0000000000000000       0x35 architecture/ia32/segmentDescriptor.o
+ .group         0x0000000000000000        0x8 architecture/port.o
+ .group         0x0000000000000000        0x8 architecture/port.o
+ .group         0x0000000000000000        0x8 architecture/port.o
+ .group         0x0000000000000000        0x8 architecture/port.o
+ .comment       0x0000000000000000       0x35 architecture/port.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+                0x0000000000100000                . = 0x100000
+
+.text           0x0000000000100000     0x1550
+ *(.multiboot)
+ .multiboot     0x0000000000100000        0xc loader.o
+ *(.text*)
+ .text          0x000000000010000c      0x141 kernel.o
+                0x000000000010000c                kernelMain
+ .text          0x000000000010014d       0x10 loader.o
+                0x000000000010014d                bootstrapKernel
+ .text          0x000000000010015d      0x1f7 utils.o
+                0x000000000010015d                printf(char*)
+                0x000000000010032b                clearScreen()
+ .text          0x0000000000100354        0x6 architecture/ia32/interrupts/gateDescriptor.o
+                0x0000000000100354                GateDescriptor::GateDescriptor()
+                0x0000000000100354                GateDescriptor::GateDescriptor()
+ .text          0x000000000010035a        0x0 architecture/ia32/interrupts/interruptDescriptorTable.o
+ .text          0x000000000010035a       0x57 architecture/ia32/interrupts/interruptGate.o
+                0x000000000010035a                InterruptGate::InterruptGate(unsigned int, unsigned short, bool)
+                0x000000000010035a                InterruptGate::InterruptGate(unsigned int, unsigned short, bool)
+ *fill*         0x00000000001003b1        0x1 
+ .text          0x00000000001003b2      0x6e5 architecture/ia32/interrupts/interruptManager.o
+                0x00000000001003b2                InterruptManager::SetInterruptDescriptorTableEntry(unsigned char, unsigned short, void (*)(), unsigned char, unsigned char)
+                0x0000000000100436                InterruptManager::InterruptManager(unsigned short, GlobalDescriptorTable*, Intel8259AManager*)
+                0x0000000000100436                InterruptManager::InterruptManager(unsigned short, GlobalDescriptorTable*, Intel8259AManager*)
+                0x0000000000100a70                InterruptManager::~InterruptManager()
+                0x0000000000100a70                InterruptManager::~InterruptManager()
+                0x0000000000100a76                InterruptManager::HandleInterrupt(unsigned char, unsigned int)
+ .text          0x0000000000100a97      0x236 architecture/ia32/interrupts/interruptStubs.o
+                0x0000000000100a97                InterruptManager::HandleException0x00()
+                0x0000000000100aa3                InterruptManager::HandleException0x01()
+                0x0000000000100aaf                InterruptManager::HandleException0x02()
+                0x0000000000100abb                InterruptManager::HandleException0x03()
+                0x0000000000100ac7                InterruptManager::HandleException0x04()
+                0x0000000000100ad3                InterruptManager::HandleException0x05()
+                0x0000000000100adf                InterruptManager::HandleException0x06()
+                0x0000000000100aeb                InterruptManager::HandleException0x07()
+                0x0000000000100af7                InterruptManager::HandleException0x08()
+                0x0000000000100b03                InterruptManager::HandleException0x09()
+                0x0000000000100b0f                InterruptManager::HandleException0x0A()
+                0x0000000000100b1b                InterruptManager::HandleException0x0B()
+                0x0000000000100b27                InterruptManager::HandleException0x0C()
+                0x0000000000100b33                InterruptManager::HandleException0x0D()
+                0x0000000000100b3f                InterruptManager::HandleException0x0E()
+                0x0000000000100b4b                InterruptManager::HandleException0x0F()
+                0x0000000000100b57                InterruptManager::HandleException0x10()
+                0x0000000000100b63                InterruptManager::HandleException0x11()
+                0x0000000000100b6f                InterruptManager::HandleException0x12()
+                0x0000000000100b7b                InterruptManager::HandleException0x13()
+                0x0000000000100b87                InterruptManager::HandleException0x14()
+                0x0000000000100b93                InterruptManager::HandleException0x15()
+                0x0000000000100b9f                InterruptManager::HandleException0x16()
+                0x0000000000100bab                InterruptManager::HandleException0x17()
+                0x0000000000100bb7                InterruptManager::HandleException0x18()
+                0x0000000000100bc3                InterruptManager::HandleException0x19()
+                0x0000000000100bcf                InterruptManager::HandleException0x1A()
+                0x0000000000100bdb                InterruptManager::HandleException0x1B()
+                0x0000000000100be7                InterruptManager::HandleException0x1C()
+                0x0000000000100bf3                InterruptManager::HandleException0x1D()
+                0x0000000000100bff                InterruptManager::HandleException0x1E()
+                0x0000000000100c0b                InterruptManager::HandleException0x1F()
+                0x0000000000100c17                InterruptManager::HandleInterruptRequest0x00()
+                0x0000000000100c23                InterruptManager::HandleInterruptRequest0x01()
+                0x0000000000100c2c                InterruptManager::HandleInterruptRequest0x02()
+                0x0000000000100c35                InterruptManager::HandleInterruptRequest0x03()
+                0x0000000000100c3e                InterruptManager::HandleInterruptRequest0x04()
+                0x0000000000100c47                InterruptManager::HandleInterruptRequest0x05()
+                0x0000000000100c50                InterruptManager::HandleInterruptRequest0x06()
+                0x0000000000100c59                InterruptManager::HandleInterruptRequest0x07()
+                0x0000000000100c62                InterruptManager::HandleInterruptRequest0x08()
+                0x0000000000100c6b                InterruptManager::HandleInterruptRequest0x09()
+                0x0000000000100c74                InterruptManager::HandleInterruptRequest0x0A()
+                0x0000000000100c7d                InterruptManager::HandleInterruptRequest0x0B()
+                0x0000000000100c86                InterruptManager::HandleInterruptRequest0x0C()
+                0x0000000000100c8f                InterruptManager::HandleInterruptRequest0x0D()
+                0x0000000000100c98                InterruptManager::HandleInterruptRequest0x0E()
+                0x0000000000100ca1                InterruptManager::HandleInterruptRequest0x0F()
+                0x0000000000100ccc                InterruptManager::InterruptIgnore()
+ *fill*         0x0000000000100ccd        0x1 
+ .text          0x0000000000100cce       0x4e architecture/ia32/interrupts/taskGate.o
+                0x0000000000100cce                TaskGate::TaskGate(unsigned short, bool)
+                0x0000000000100cce                TaskGate::TaskGate(unsigned short, bool)
+ .text          0x0000000000100d1c       0x4e architecture/ia32/interrupts/trapGate.o
+                0x0000000000100d1c                TrapGate::TrapGate(unsigned short, bool)
+                0x0000000000100d1c                TrapGate::TrapGate(unsigned short, bool)
+ .text          0x0000000000100d6a       0xe8 architecture/ia32/pics/intel8259a/intel8259a.o
+                0x0000000000100d6a                Intel8259A::Intel8259A(unsigned short, unsigned short)
+                0x0000000000100d6a                Intel8259A::Intel8259A(unsigned short, unsigned short)
+                0x0000000000100dac                Intel8259A::~Intel8259A()
+                0x0000000000100dac                Intel8259A::~Intel8259A()
+                0x0000000000100dd6                Intel8259A::WriteCommand(unsigned char)
+                0x0000000000100dfa                Intel8259A::ReadCommand()
+                0x0000000000100e12                Intel8259A::WriteData(unsigned char)
+                0x0000000000100e38                Intel8259A::ReadData()
+ .text          0x0000000000100e52      0x142 architecture/ia32/pics/intel8259a/intel8259aManager.o
+                0x0000000000100e52                Intel8259AManager::Intel8259AManager(unsigned short)
+                0x0000000000100e52                Intel8259AManager::Intel8259AManager(unsigned short)
+                0x0000000000100ea0                Intel8259AManager::StartInterrupts()
+                0x0000000000100ea8                Intel8259AManager::StopInterrupts()
+                0x0000000000100eb0                Intel8259AManager::InitializeWithDefaultSettings()
+ .text          0x0000000000100f94       0xde architecture/ia32/globalDescriptorTable.o
+                0x0000000000100f94                GlobalDescriptorTable::GlobalDescriptorTable()
+                0x0000000000100f94                GlobalDescriptorTable::GlobalDescriptorTable()
+                0x0000000000101010                GlobalDescriptorTable::~GlobalDescriptorTable()
+                0x0000000000101010                GlobalDescriptorTable::~GlobalDescriptorTable()
+                0x000000000010105e                GlobalDescriptorTable::CodeSegmentSelector()
+                0x0000000000101068                GlobalDescriptorTable::DataSegmentSelector()
+ .text          0x0000000000101072      0x196 architecture/ia32/segmentDescriptor.o
+                0x0000000000101072                SegmentDescriptor::SegmentDescriptor(unsigned int, unsigned int, unsigned char)
+                0x0000000000101072                SegmentDescriptor::SegmentDescriptor(unsigned int, unsigned int, unsigned char)
+                0x000000000010111e                SegmentDescriptor::~SegmentDescriptor()
+                0x000000000010111e                SegmentDescriptor::~SegmentDescriptor()
+                0x0000000000101124                SegmentDescriptor::Base()
+                0x0000000000101190                SegmentDescriptor::Limit()
+ .text          0x0000000000101208      0x20c architecture/port.o
+                0x0000000000101208                Port::Port(unsigned short)
+                0x0000000000101208                Port::Port(unsigned short)
+                0x0000000000101222                Port::~Port()
+                0x0000000000101222                Port::~Port()
+                0x0000000000101228                Port8Bit::Port8Bit(unsigned short)
+                0x0000000000101228                Port8Bit::Port8Bit(unsigned short)
+                0x0000000000101256                Port8Bit::~Port8Bit()
+                0x0000000000101256                Port8Bit::~Port8Bit()
+                0x0000000000101276                Port8Bit::Write(unsigned char)
+                0x0000000000101292                Port8Bit::Read()
+                0x00000000001012ac                Port8BitSlow::Port8BitSlow(unsigned short)
+                0x00000000001012ac                Port8BitSlow::Port8BitSlow(unsigned short)
+                0x00000000001012d8                Port8BitSlow::~Port8BitSlow()
+                0x00000000001012d8                Port8BitSlow::~Port8BitSlow()
+                0x00000000001012f4                Port8BitSlow::Write(unsigned char)
+                0x0000000000101314                Port16Bit::Port16Bit(unsigned short)
+                0x0000000000101314                Port16Bit::Port16Bit(unsigned short)
+                0x0000000000101342                Port16Bit::~Port16Bit()
+                0x0000000000101342                Port16Bit::~Port16Bit()
+                0x0000000000101362                Port16Bit::Write(unsigned short)
+                0x0000000000101380                Port16Bit::Read()
+                0x000000000010139c                Port32Bit::Port32Bit(unsigned short)
+                0x000000000010139c                Port32Bit::Port32Bit(unsigned short)
+                0x00000000001013ca                Port32Bit::~Port32Bit()
+                0x00000000001013ca                Port32Bit::~Port32Bit()
+                0x00000000001013ea                Port32Bit::Write(unsigned int)
+                0x00000000001013fc                Port32Bit::Read()
+ *(.rodata)
+ .rodata        0x0000000000101414      0x117 kernel.o
+ .rodata        0x000000000010152b        0x2 utils.o
+ *fill*         0x000000000010152d        0x3 
+ .rodata        0x0000000000101530       0x20 architecture/ia32/interrupts/interruptManager.o
+
+.iplt           0x0000000000101550        0x0
+ .iplt          0x0000000000101550        0x0 kernel.o
+
+.eh_frame       0x0000000000101550      0x5e0
+ .eh_frame      0x0000000000101550       0x34 kernel.o
+ .eh_frame      0x0000000000101584       0x48 utils.o
+                                         0x60 (size before relaxing)
+ .eh_frame      0x00000000001015cc       0x20 architecture/ia32/interrupts/gateDescriptor.o
+                                         0x38 (size before relaxing)
+ .eh_frame      0x00000000001015ec       0x20 architecture/ia32/interrupts/interruptGate.o
+                                         0x38 (size before relaxing)
+ .eh_frame      0x000000000010160c       0x84 architecture/ia32/interrupts/interruptManager.o
+                                         0x9c (size before relaxing)
+ .eh_frame      0x0000000000101690       0x20 architecture/ia32/interrupts/taskGate.o
+                                         0x38 (size before relaxing)
+ .eh_frame      0x00000000001016b0       0x20 architecture/ia32/interrupts/trapGate.o
+                                         0x38 (size before relaxing)
+ .eh_frame      0x00000000001016d0       0xc0 architecture/ia32/pics/intel8259a/intel8259a.o
+                                         0xd8 (size before relaxing)
+ .eh_frame      0x0000000000101790       0x80 architecture/ia32/pics/intel8259a/intel8259aManager.o
+                                         0x98 (size before relaxing)
+ .eh_frame      0x0000000000101810       0x80 architecture/ia32/globalDescriptorTable.o
+                                         0x98 (size before relaxing)
+ .eh_frame      0x0000000000101890       0x80 architecture/ia32/segmentDescriptor.o
+                                         0x98 (size before relaxing)
+ .eh_frame      0x0000000000101910      0x220 architecture/port.o
+                                        0x238 (size before relaxing)
+
+.rodata._ZTV9Port32Bit
+                0x0000000000101b30       0x10
+ .rodata._ZTV9Port32Bit
+                0x0000000000101b30       0x10 architecture/port.o
+                0x0000000000101b30                vtable for Port32Bit
+
+.rodata._ZTV9Port16Bit
+                0x0000000000101b40       0x10
+ .rodata._ZTV9Port16Bit
+                0x0000000000101b40       0x10 architecture/port.o
+                0x0000000000101b40                vtable for Port16Bit
+
+.rodata._ZTV12Port8BitSlow
+                0x0000000000101b50       0x10
+ .rodata._ZTV12Port8BitSlow
+                0x0000000000101b50       0x10 architecture/port.o
+                0x0000000000101b50                vtable for Port8BitSlow
+
+.rodata._ZTV8Port8Bit
+                0x0000000000101b60       0x10
+ .rodata._ZTV8Port8Bit
+                0x0000000000101b60       0x10 architecture/port.o
+                0x0000000000101b60                vtable for Port8Bit
+
+.rel.dyn        0x0000000000101b70        0x0
+ .rel.iplt      0x0000000000101b70        0x0 kernel.o
+ .rel.text      0x0000000000101b70        0x0 kernel.o
+
+.data           0x0000000000101b70        0x5
+                0x0000000000101b70                start_ctors = .
+ *(.init_array)
+ *(SORT(.init_array.*))
+                0x0000000000101b70                end_ctors = .
+ *(.data)
+ .data          0x0000000000101b70        0x0 kernel.o
+ .data          0x0000000000101b70        0x0 loader.o
+ .data          0x0000000000101b70        0x4 utils.o
+ .data          0x0000000000101b74        0x0 architecture/ia32/interrupts/gateDescriptor.o
+ .data          0x0000000000101b74        0x0 architecture/ia32/interrupts/interruptDescriptorTable.o
+ .data          0x0000000000101b74        0x0 architecture/ia32/interrupts/interruptGate.o
+ .data          0x0000000000101b74        0x0 architecture/ia32/interrupts/interruptManager.o
+ .data          0x0000000000101b74        0x1 architecture/ia32/interrupts/interruptStubs.o
+ .data          0x0000000000101b75        0x0 architecture/ia32/interrupts/taskGate.o
+ .data          0x0000000000101b75        0x0 architecture/ia32/interrupts/trapGate.o
+ .data          0x0000000000101b75        0x0 architecture/ia32/pics/intel8259a/intel8259a.o
+ .data          0x0000000000101b75        0x0 architecture/ia32/pics/intel8259a/intel8259aManager.o
+ .data          0x0000000000101b75        0x0 architecture/ia32/globalDescriptorTable.o
+ .data          0x0000000000101b75        0x0 architecture/ia32/segmentDescriptor.o
+ .data          0x0000000000101b75        0x0 architecture/port.o
+
+.igot.plt       0x0000000000101b78        0x0
+ .igot.plt      0x0000000000101b78        0x0 kernel.o
+
+.bss            0x0000000000101b80   0x200820
+ *(.bss)
+ .bss           0x0000000000101b80        0x0 kernel.o
+ .bss           0x0000000000101b80   0x200000 loader.o
+ .bss           0x0000000000301b80        0x2 utils.o
+ .bss           0x0000000000301b82        0x0 architecture/ia32/interrupts/gateDescriptor.o
+ .bss           0x0000000000301b82        0x0 architecture/ia32/interrupts/interruptDescriptorTable.o
+ .bss           0x0000000000301b82        0x0 architecture/ia32/interrupts/interruptGate.o
+ *fill*         0x0000000000301b82       0x1e 
+ .bss           0x0000000000301ba0      0x800 architecture/ia32/interrupts/interruptManager.o
+                0x0000000000301ba0                InterruptManager::interruptDescriptorTable
+ .bss           0x00000000003023a0        0x0 architecture/ia32/interrupts/interruptStubs.o
+ .bss           0x00000000003023a0        0x0 architecture/ia32/interrupts/taskGate.o
+ .bss           0x00000000003023a0        0x0 architecture/ia32/interrupts/trapGate.o
+ .bss           0x00000000003023a0        0x0 architecture/ia32/pics/intel8259a/intel8259a.o
+ .bss           0x00000000003023a0        0x0 architecture/ia32/pics/intel8259a/intel8259aManager.o
+ .bss           0x00000000003023a0        0x0 architecture/ia32/globalDescriptorTable.o
+ .bss           0x00000000003023a0        0x0 architecture/ia32/segmentDescriptor.o
+ .bss           0x00000000003023a0        0x0 architecture/port.o
+
+/DISCARD/
+ *(.fini_array*)
+ *(.comment)
+LOAD kernel.o
+LOAD loader.o
+LOAD utils.o
+LOAD architecture/ia32/interrupts/gateDescriptor.o
+LOAD architecture/ia32/interrupts/interruptDescriptorTable.o
+LOAD architecture/ia32/interrupts/interruptGate.o
+LOAD architecture/ia32/interrupts/interruptManager.o
+LOAD architecture/ia32/interrupts/interruptStubs.o
+LOAD architecture/ia32/interrupts/taskGate.o
+LOAD architecture/ia32/interrupts/trapGate.o
+LOAD architecture/ia32/pics/intel8259a/intel8259a.o
+LOAD architecture/ia32/pics/intel8259a/intel8259aManager.o
+LOAD architecture/ia32/globalDescriptorTable.o
+LOAD architecture/ia32/segmentDescriptor.o
+LOAD architecture/port.o
+OUTPUT(cppOS.bin elf32-i386)
+
+.debug_info     0x0000000000000000     0x2d1a
+ .debug_info    0x0000000000000000      0x78f kernel.o
+ .debug_info    0x000000000000078f      0x119 utils.o
+ .debug_info    0x00000000000008a8      0x17c architecture/ia32/interrupts/gateDescriptor.o
+ .debug_info    0x0000000000000a24      0x20a architecture/ia32/interrupts/interruptGate.o
+ .debug_info    0x0000000000000c2e      0x92c architecture/ia32/interrupts/interruptManager.o
+ .debug_info    0x000000000000155a      0x1da architecture/ia32/interrupts/taskGate.o
+ .debug_info    0x0000000000001734      0x1da architecture/ia32/interrupts/trapGate.o
+ .debug_info    0x000000000000190e      0x2c2 architecture/ia32/pics/intel8259a/intel8259a.o
+ .debug_info    0x0000000000001bd0      0x2c3 architecture/ia32/pics/intel8259a/intel8259aManager.o
+ .debug_info    0x0000000000001e93      0x329 architecture/ia32/globalDescriptorTable.o
+ .debug_info    0x00000000000021bc      0x2c7 architecture/ia32/segmentDescriptor.o
+ .debug_info    0x0000000000002483      0x897 architecture/port.o
+
+.debug_abbrev   0x0000000000000000     0x1079
+ .debug_abbrev  0x0000000000000000      0x197 kernel.o
+ .debug_abbrev  0x0000000000000197       0xa8 utils.o
+ .debug_abbrev  0x000000000000023f       0xd8 architecture/ia32/interrupts/gateDescriptor.o
+ .debug_abbrev  0x0000000000000317      0x117 architecture/ia32/interrupts/interruptGate.o
+ .debug_abbrev  0x000000000000042e      0x26b architecture/ia32/interrupts/interruptManager.o
+ .debug_abbrev  0x0000000000000699      0x117 architecture/ia32/interrupts/taskGate.o
+ .debug_abbrev  0x00000000000007b0      0x117 architecture/ia32/interrupts/trapGate.o
+ .debug_abbrev  0x00000000000008c7      0x157 architecture/ia32/pics/intel8259a/intel8259a.o
+ .debug_abbrev  0x0000000000000a1e      0x16e architecture/ia32/pics/intel8259a/intel8259aManager.o
+ .debug_abbrev  0x0000000000000b8c      0x165 architecture/ia32/globalDescriptorTable.o
+ .debug_abbrev  0x0000000000000cf1      0x172 architecture/ia32/segmentDescriptor.o
+ .debug_abbrev  0x0000000000000e63      0x216 architecture/port.o
+
+.debug_aranges  0x0000000000000000      0x180
+ .debug_aranges
+                0x0000000000000000       0x20 kernel.o
+ .debug_aranges
+                0x0000000000000020       0x20 utils.o
+ .debug_aranges
+                0x0000000000000040       0x20 architecture/ia32/interrupts/gateDescriptor.o
+ .debug_aranges
+                0x0000000000000060       0x20 architecture/ia32/interrupts/interruptGate.o
+ .debug_aranges
+                0x0000000000000080       0x20 architecture/ia32/interrupts/interruptManager.o
+ .debug_aranges
+                0x00000000000000a0       0x20 architecture/ia32/interrupts/taskGate.o
+ .debug_aranges
+                0x00000000000000c0       0x20 architecture/ia32/interrupts/trapGate.o
+ .debug_aranges
+                0x00000000000000e0       0x20 architecture/ia32/pics/intel8259a/intel8259a.o
+ .debug_aranges
+                0x0000000000000100       0x20 architecture/ia32/pics/intel8259a/intel8259aManager.o
+ .debug_aranges
+                0x0000000000000120       0x20 architecture/ia32/globalDescriptorTable.o
+ .debug_aranges
+                0x0000000000000140       0x20 architecture/ia32/segmentDescriptor.o
+ .debug_aranges
+                0x0000000000000160       0x20 architecture/port.o
+
+.debug_line     0x0000000000000000      0xbbd
+ .debug_line    0x0000000000000000      0x17a kernel.o
+ .debug_line    0x000000000000017a       0xa8 utils.o
+ .debug_line    0x0000000000000222       0xd6 architecture/ia32/interrupts/gateDescriptor.o
+ .debug_line    0x00000000000002f8        0x0 architecture/ia32/interrupts/interruptDescriptorTable.o
+ .debug_line    0x00000000000002f8       0xef architecture/ia32/interrupts/interruptGate.o
+ .debug_line    0x00000000000003e7      0x231 architecture/ia32/interrupts/interruptManager.o
+ .debug_line    0x0000000000000618       0xe4 architecture/ia32/interrupts/taskGate.o
+ .debug_line    0x00000000000006fc       0xe4 architecture/ia32/interrupts/trapGate.o
+ .debug_line    0x00000000000007e0       0xbe architecture/ia32/pics/intel8259a/intel8259a.o
+ .debug_line    0x000000000000089e       0xe3 architecture/ia32/pics/intel8259a/intel8259aManager.o
+ .debug_line    0x0000000000000981       0xfa architecture/ia32/globalDescriptorTable.o
+ .debug_line    0x0000000000000a7b       0xb5 architecture/ia32/segmentDescriptor.o
+ .debug_line    0x0000000000000b30       0x8d architecture/port.o
+
+.debug_str      0x0000000000000000     0x1dd7
+ .debug_str     0x0000000000000000     0x1496 kernel.o
+                                       0x1510 (size before relaxing)
+ .debug_str     0x0000000000001496       0x46 utils.o
+                                        0x168 (size before relaxing)
+ .debug_str     0x00000000000014dc      0x155 architecture/ia32/interrupts/gateDescriptor.o
+                                        0x283 (size before relaxing)
+ .debug_str     0x0000000000001631       0x3a architecture/ia32/interrupts/interruptDescriptorTable.o
+                                         0xe9 (size before relaxing)
+ .debug_str     0x000000000000166b       0x7d architecture/ia32/interrupts/interruptGate.o
+                                        0x2c1 (size before relaxing)
+ .debug_str     0x00000000000016e8      0x139 architecture/ia32/interrupts/interruptManager.o
+                                       0x162f (size before relaxing)
+ .debug_str     0x0000000000001821       0x71 architecture/ia32/interrupts/taskGate.o
+                                        0x2ac (size before relaxing)
+ .debug_str     0x0000000000001892       0x57 architecture/ia32/interrupts/trapGate.o
+                                        0x292 (size before relaxing)
+ .debug_str     0x00000000000018e9       0x82 architecture/ia32/pics/intel8259a/intel8259a.o
+                                        0x2b7 (size before relaxing)
+ .debug_str     0x000000000000196b       0x6b architecture/ia32/pics/intel8259a/intel8259aManager.o
+                                        0x3b6 (size before relaxing)
+ .debug_str     0x00000000000019d6       0xa4 architecture/ia32/globalDescriptorTable.o
+                                        0x3fc (size before relaxing)
+ .debug_str     0x0000000000001a7a       0x6e architecture/ia32/segmentDescriptor.o
+                                        0x288 (size before relaxing)
+ .debug_str     0x0000000000001ae8      0x2ef architecture/port.o
+                                        0x464 (size before relaxing)
+
+.note.GNU-stack
+                0x0000000000000000        0x0
+ .note.GNU-stack
+                0x0000000000000000        0x0 kernel.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 utils.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 architecture/ia32/interrupts/gateDescriptor.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 architecture/ia32/interrupts/interruptDescriptorTable.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 architecture/ia32/interrupts/interruptGate.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 architecture/ia32/interrupts/interruptManager.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 architecture/ia32/interrupts/taskGate.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 architecture/ia32/interrupts/trapGate.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 architecture/ia32/pics/intel8259a/intel8259a.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 architecture/ia32/pics/intel8259a/intel8259aManager.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 architecture/ia32/globalDescriptorTable.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 architecture/ia32/segmentDescriptor.o
+ .note.GNU-stack
+                0x0000000000000000        0x0 architecture/port.o
+
+.stab           0x0000000000000000      0x390
+ .stab          0x0000000000000000       0x78 loader.o
+ .stab          0x0000000000000078      0x318 architecture/ia32/interrupts/interruptStubs.o
+                                        0x324 (size before relaxing)
+
+.stabstr        0x0000000000000000       0x5b
+ .stabstr       0x0000000000000000       0x5b loader.o

@@ -12,12 +12,12 @@
     class Intel8259AManager {
         
         private:
-            Intel8259A masterPIC;
-            Intel8259A slavePIC;
+            
             uint16_t hardwareInterruptOffset;
             
         public:
-
+            Intel8259A masterPIC;
+            Intel8259A slavePIC;
             // Instansiates a new Intel 8259A PIC Manager that can be used to communicate with,
             // initialize, and configure Intel 8259A PICs in a system. 
             Intel8259AManager(uint16_t hardwareInterruptOffset);

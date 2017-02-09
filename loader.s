@@ -41,13 +41,11 @@
 		# Move the current value of the ESP Register into the kernelStack memory location (is this correct?)
 		mov $kernelStack, %esp
 		
-		# Push the contents of the EAX and EBX Registers onto the Stack
-		push %eax # TODO: Figure out if this is multiboot_structure
-		push %ebx # TODO: Figure out if this is magicNumber
-		
-		# Call the kernelMain function and pass control to the Kernel itself
+		# Using "Caller" Calling Convention to call kernelMain
+		push %eax
+		push %ebx
 		call kernelMain # Linked in from kernel.cpp
-
+		
 	# In-case kernelMain exits, infinite loop
 	_stop:
 		cli # Clear interrupts

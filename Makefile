@@ -1,7 +1,7 @@
 
 GPPPARAMS = -m32 -fno-use-cxa-atexit -nostdlib -fno-builtin -fno-rtti -fno-exceptions -fno-leading-underscore
-ASPARAMS = --32
-LDPARAMS = -melf_i386
+ASPARAMS = --32 --gstabs+
+LDPARAMS = -melf_i386 --print-map > System.map-cppOS
 
 objects = 	kernel.o \
 			loader.o \
@@ -47,11 +47,16 @@ iso: cppOS.bin
 	rm -rf iso
 
 debug: cppOS.bin
-	qemu-system-x86_64 -kernel cppOS.bin -s -S &
-	gdb cppOS.bin -symbols . -tui -ex "target remote localhost:1234"
+	qemu-system-x86_64 -kernel cppOS.bin -s -S -d int -D test.log -m size=64 &
+	gdb -tui -ex "target remote localhost:1234" -s cppOS.bin
 
 run: cppOS.bin
-	qemu-system-x86_64 -kernel cppOS.bin
+	qemu-system-x86_64 -kernel cppOS.bin -m size=64
+
+buildVolatilityProfile: cppOS.bin
+	mkdir volatility
+	cp System.map-cppOS volatility
+	dwarfdump -di cppOS.bin > volatility/module.dwarf
 
 .PHONY: clean
 clean:

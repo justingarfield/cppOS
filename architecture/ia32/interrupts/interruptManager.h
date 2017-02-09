@@ -17,7 +17,7 @@ class InterruptManager
 
 		struct InterruptDescriptorTablePointer
 		{
-			uint16_t size;
+			uint16_t limit;
 			uint32_t base;
 		} __attribute__((packed));
 
@@ -45,8 +45,8 @@ class InterruptManager
 		static void HandleInterruptRequest0x0D();
 		static void HandleInterruptRequest0x0E();
 		static void HandleInterruptRequest0x0F();
-		static void HandleInterruptRequest0x31();
 
+		// IRQs 0-31 are reserved for Exceptions
 		static void HandleException0x00();
 		static void HandleException0x01();
 		static void HandleException0x02();
@@ -67,6 +67,18 @@ class InterruptManager
 		static void HandleException0x11();
 		static void HandleException0x12();
 		static void HandleException0x13();
+		static void HandleException0x14();
+		static void HandleException0x15();
+		static void HandleException0x16();
+		static void HandleException0x17();
+		static void HandleException0x18();
+		static void HandleException0x19();
+		static void HandleException0x1A();
+		static void HandleException0x1B();
+		static void HandleException0x1C();
+		static void HandleException0x1D();
+		static void HandleException0x1E();
+		static void HandleException0x1F();
 
 		static uint32_t HandleInterrupt(uint8_t interrupt, uint32_t esp);
 
