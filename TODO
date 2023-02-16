@@ -1,0 +1,24 @@
+## TODO
+* Figure out 64-bit native
+* Add section for readelf and objdump
+* Add section for gdb and remote debugging with qemu
+* Add section for 
+
+
+//== loader.s
+// Define the Type "Constructor" which is a Pointer to a Function that takes zero-arguments.
+# TODO: Why do we do this?
+call callConstructors # Linked in from kernel.cpp
+
+//== kernel.cpp
+typedef void (*Constructor)();
+
+extern "C" Constructor start_ctors;
+extern "C" Constructor end_ctors;
+
+extern "C" void callConstructors()
+{
+	for(Constructor* i = &start_ctors; i != &end_ctors; i++)
+		(*i)();
+}
+*/

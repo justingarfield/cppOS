@@ -1,10 +1,10 @@
-
-ENTRY(loader)
 OUTPUT_FORMAT(elf32-i386)
 OUTPUT_ARCH(i386:i386)
 
 SECTIONS
 {
+	
+	ENTRY(bootstrapKernel)
 
 	. = 0x0100000;
 	
